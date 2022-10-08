@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
+
 const Student = sequelize.define('Student', {
     name: {
         type: DataTypes.CHAR(60),
