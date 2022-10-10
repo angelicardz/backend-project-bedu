@@ -1,7 +1,7 @@
 # backend-project-bedu
 
 ## API - School
-![API School](https://drive.google.com/file/d/1-AqBzyhv1hfnJ8e_zGrhWILxF8oor6tt/view?usp=sharing)
+![API School](https://drive.google.com/file/d/1-AqBzyhv1hfnJ8e_zGrhWILxF8oor6tt/view)
 
 ## Description 
 This school API is free to use and you can create users (teachers and students), submit grades, create new groups, delete users, etc.
