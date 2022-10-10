@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+const Grade = require("./grades");
 
 const Subject = sequelize.define("Subject", {
   name: {
@@ -12,5 +13,8 @@ const Subject = sequelize.define("Subject", {
     allowNull: false,
   },
 });
+
+Subject.hasMany(Grade);
+Grade.belongsTo(Subject);
 
 module.exports = Subject;

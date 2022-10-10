@@ -8,4 +8,6 @@ const Grade = sequelize.define('Grade', {
     },
 });
 
+
+
 module.exports = Grade;
