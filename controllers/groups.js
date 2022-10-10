@@ -2,18 +2,18 @@ const Group = require('../models/groups');
 
 async function createGroup(req, res){
     const body = req.body;
-    const group = group.create(body);
+    const group = await Group.create(body);
     res.status(201).json(group);
 }
 
 async function getGroup(req, res){
     const id = req.params.id;
-    const group = Group.findByPk(id);
+    const group = await Group.findByPk(id);
     res.status(200).json(group);
 } 
 
 async function getGroups(req, res){
-    const group = Group.findAll();
+    const group = await Group.findAll();
     res.status(200).json(group);
 }
 

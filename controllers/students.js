@@ -2,18 +2,18 @@ const Student = require('../models/students');
 
 async function createStudent(req, res) {
     const body = req.body;
-    const student = Student.create(body);
+    const student = await Student.create(body);
     res.status(201).json(student);
 }
 
 async function getStudent(req, res) {
     const id = req.params.id;
-    const student = Student.findByPk(id);
+    const student = await Student.findByPk(id);
     res.status(200).json(student);
 }
 
 async function getStudents(req, res) {
-    const students = Student.findAll();
+    const students =  await Student.findAll();
     res.status(200).json(students);
 }
 

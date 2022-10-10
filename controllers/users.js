@@ -43,12 +43,13 @@ async function logIn(req, res) {
 
 async function getUser(req, res) {
     const id = req.params.id;
-    const user = User.findByPk(id);
+    const user = await User.findByPk(id);
     res.status(200).json(user);
 }
 
 async function getUsers(req, res) {
-    const users = User.findAll();
+    const users =  await User.findAll();
+    console.log(users)
     res.status(200).json(users);
 }
 
@@ -62,7 +63,7 @@ async function updateUser(req, res) {
 
 async function deleteUser(req, res) {
     const id = req.params.id;
-    const deleted = User.destroy(
+    const deleted =  User.destroy(
         { where: { id } }
     );
     res.status(200).json(deleted);

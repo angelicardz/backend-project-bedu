@@ -2,18 +2,18 @@ const Grade = require('../models/grades');
 
 async function createGrade(req, res){
     const body = req.body;
-    const grade = grade.create(body);
+    const grade = await Grade.create(body);
     res.status(201).json(grade);
 }
 
 async function getGrade(req, res){
     const id = req.params.id;
-    const grade = Grade.findByPk(id);
+    const grade = await Grade.findByPk(id);
     res.status(200).json(grade);
 } 
 
 async function getGrades(req, res){
-    const grade = Grade.findAll();
+    const grade = await Grade.findAll();
     res.status(200).json(grade);
 }
 
