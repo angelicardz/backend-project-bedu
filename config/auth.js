@@ -1,5 +1,6 @@
 const secret = require('./secret');
 const { expressjwt } = require('express-jwt');
+const User = require('../models/users');
 
 //Bearer <JWT>
 function getTokenFromHeader(req) {
@@ -9,26 +10,52 @@ function getTokenFromHeader(req) {
 }
 
 const auth = {
-    required: function (req, res, next){
-        if(!req.auth || !req.auth.user) {
+    required: function (req, res, next) {
+        if (!req.auth || !req.auth.rol) {
             return res.sendStatus(401);
         }
         next();
     },
-    isTeacher: function (req, res, next) {
-        //console.log(req.auth.user);
-        if(!req.auth) {
+    isAdmin: async (req, res, next) => {
+        const email = req.auth.user;
+        const user = await User.findOne({ where: { email: email } });
+        const rol = user.rol
+        if (!req.auth) {
             return res.sendStatus(401);
         }
-        if (req.auth.rol === 1) {
-            console.log("Eres un profesor")
-            return res.sendStatus(200);
-        }else{
-            console.log("Eres un profesor")
-            return res.sendStatus(200);
+        if (rol !== 0) {
+            console.log("Eres un Estudiante")
+            return res.sendStatus(403);
         }
         next();
     },
+    isTeacher: async (req, res, next) => {
+        const email = req.auth.user;
+        const user = await User.findOne({ where: { email: email } });
+        const rol = user.rol
+        if (!req.auth) {
+            return res.sendStatus(401);
+        }
+        if (rol !== 1) {
+            console.log("Eres un profesor")
+            return res.sendStatus(403);
+        }
+        next();
+    },
+    isStudent: async (req, res, next) => {
+        const email = req.auth.user;
+        const user = await User.findOne({ where: { email: email } });
+        const rol = user.rol
+        if (!req.auth) {
+            return res.sendStatus(401);
+        }
+        if (rol !== 2) {
+            console.log("Eres un Estudiante")
+            return res.sendStatus(403);
+        }
+        next();
+    },
+
     optional: expressjwt({
         secret: secret,
         algorithms: ['HS256'],

@@ -1,12 +1,13 @@
 // .env
 require('dotenv').config();
-
 const express = require('express');
 const sequelize = require('./config/db');
 const routes = require('./routes/index'); 
+const auth = require('./config/auth');
 
 const app = express();
 app.use(express.json());
+app.use(auth.optional);
 app.use('/api/v1/', routes);
 
 try {

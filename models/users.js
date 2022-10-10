@@ -60,7 +60,7 @@ User.generateJWT = function(user) {
     exp.setDate(today.getDate() + 60); // En 2 meses
 
     return jwt.sign({
-        user: user.username,
+        user: user.email,
         exp: parseInt(exp.getTime() / 1000) // En segundos
     }, secret);
 }

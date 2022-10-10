@@ -7,10 +7,13 @@ const {
     deleteGrade
 } = require('../controllers/grades')
 
-router.get('/', getGrades);
-router.get('/:id', getGrade);
-router.post('/', createGrade);
-router.patch('/:id', updateGrade);
-router.delete('/:id', deleteGrade);
+const auth = require('../config/auth');
+
+
+router.get('/',auth.required ,getGrades);
+router.get('/:id',auth.required ,getGrade);
+router.post('/', auth.isTeacher,createGrade);
+router.patch('/:id', auth.isTeacher,updateGrade);
+router.delete('/:id', auth.isTeacher,deleteGrade);
 
 module.exports = router;

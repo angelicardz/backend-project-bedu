@@ -30,8 +30,10 @@ async function logIn(req, res) {
     if (User.validatePassword(body['password'], user.password_salt, user.password_hash)) {
         return res.status(200).json({
             email: user.email,
-            token: User.generateJWT(user),
-            rol: user.rol 
+            rol: user.rol,
+            id: user.id,
+            token: User.generateJWT(user)
+            
         }); // JWT
     } else {
         return res.status(400).json({mensaje: "Password Incorrecto"});

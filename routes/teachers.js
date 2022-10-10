@@ -7,10 +7,12 @@ const {
     deleteTeacher
 } = require('../controllers/teachers')
 
-router.get('/', getTeachers);
-router.get('/:id', getTeacher);
-router.post('/', createTeacher);
-router.patch('/:id', updateTeacher);
-router.delete('/:id', deleteTeacher);
+const auth = require('../config/auth');
+
+router.get('/',auth.required  ,getTeachers);
+router.get('/:id',auth.required ,getTeacher);
+router.post('/', auth.isAdmin ,createTeacher);
+router.patch('/:id', auth.isAdmin,updateTeacher);
+router.delete('/:id', auth.isAdmin,deleteTeacher);
 
 module.exports = router;

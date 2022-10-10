@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
   res.json({ info: "Welcome to school API!" });
 });
 
+
 router.use("/students", students);
 router.use("/subjects", subjects);
 router.use("/teachers", teachers);

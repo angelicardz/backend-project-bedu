@@ -7,10 +7,11 @@ const {
   deleteSubject,
 } = require("../controllers/subjects");
 
-router.get("/", getSubjects);
-router.get("/:id", getSubject);
-router.post("/", createSubject);
-router.patch("/:id", updateSubject);
-router.delete("/:id", deleteSubject);
+const auth = require('../config/auth');
+router.get("/", auth.required ,getSubjects);
+router.get("/:id",auth.required  ,getSubject);
+router.post("/",auth.isAdmin  ,createSubject);
+router.patch("/:id",auth.isAdmin , updateSubject);
+router.delete("/:id", auth.isAdmin,deleteSubject);
 
 module.exports = router;
