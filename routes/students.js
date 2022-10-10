@@ -6,9 +6,10 @@ const {
     updateStudent,
     deleteStudent
 } = require('../controllers/students')
+const auth = require('../config/auth');
 
-router.get('/', getStudents);
-router.get('/:id', getStudent);
+router.get('/',auth.isTeacher ,getStudents);
+router.get('/:id',auth.required ,getStudent);
 router.post('/', createStudent);
 router.patch('/:id', updateStudent);
 router.delete('/:id', deleteStudent);
