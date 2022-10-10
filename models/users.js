@@ -32,10 +32,10 @@ const User = sequelize.define('User', {
 
 });
 
-User.hasOne(Student);
-Student.belongsTo(User);
+// User.hasOne(Student);
+// Student.belongsTo(User);
 
-User.hasOne(Teacher);
-Teacher.belongsTo(User);
+// User.hasOne(Teacher);
+// Teacher.belongsTo(User);
 
 module.exports = User;

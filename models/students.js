@@ -1,29 +1,15 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const Grade = require('./grades');
+const User = require('./users');
 
 
-const Student = sequelize.define('Student', {
-    name: {
-        type: DataTypes.CHAR(60),
-        allowNull: false
-    },
-    surname: {
-        type: DataTypes.CHAR(60),
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.CHAR(64),
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true
-        }
-    }
-
-});
+const Student = sequelize.define('Student');
 
 Student.hasMany(Grade);
 Grade.belongsTo(Student);
+
+Student.hasOne(User);
+User.belongsTo(Student);
 
 module.exports = Student;
